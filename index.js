@@ -12,16 +12,14 @@ let group;
 
 function create() {
 
-    this.stage.backgroundColor = '#0072bc';
+  this.stage.backgroundColor = '#0072bc';
 
-    group = game.add.group()
+  group = game.add.group()
 
-    for (let i = 0; i < 5; i++) {
-        columns[i] = game.add.group();
-        for (let j = 0; j < 3; j++) {
-            columns[i][j] = group.create()
-            // Добавляем изображение
-            const image = game.add.image(i * 110, j * 110, 'strawberry');
+  for (let i = 0; i < 5; i++) {
+      columns[i] = game.add.group();
+      for (let j = 0; j < 30; j++) {
+            const image = columns[i][j] = group.create(i * 110, j * -110, 'strawberry');
             image.scale.set(0.15);
             image.anchor.set(-0.3, -0.2)
             columns[i].add(image);
@@ -30,13 +28,12 @@ function create() {
 
 
 
-
         // Создаем кнопку
+
         button = game.add.button(250, 350, 'button', spinSlot, this, 1, 2, 0);
         button.scale.set(0.2)
 
         // Вращение слотов
-
 
         function spinSlot() {
 
@@ -54,7 +51,7 @@ function create() {
             columns.forEach(column => {
                 column.forEach(image => {
                     // Создаем анимацию движения вверх
-                    const tweenUp = this.add.tween(image).to({ y: -200 }, 300, "Sine.easeInOut", true, 0, -1, true);
+                    const tweenUp = this.add.tween(image).to({ y: 1000 }, 300, "Linear", true, 0, -1);
                     tweenUp.start();
         });
     });
