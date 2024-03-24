@@ -37,26 +37,29 @@ function create() {
 
 // Вращение слотов
 
-function spinSlot() {
+  let isAnimationRunning = false;
 
-  // Высчитываем задержку для каждой колонки по индексу
-  let delay = 0;
-  columns.forEach((column) => {
-    column.tween = this.add.tween(column).to({ y: 1000 }, 750, "Linear", true, delay, 1, false);
-      // Увеличиваем задержку для каждой колонки
-      delay += 100;
-      column.tween.repeat(5)
-      column.tween.onComplete.add(function() {
-        column.tween.stop();
-      }, this);
-  });
-}
-
-
-
-}
-
-function update() {
+  function spinSlot() {
+    if (isAnimationRunning) {
+      setTimeout(() => {
+        columns.forEach((column) => {
+            column.tween.stop();
+        });
+        isAnimationRunning = false;
+      }, 2000);
+    } else {
+      let delay = 0;
+      columns.forEach((column) => {
+        column.tween = this.add.tween(column).to({ y: 1000 }, 750, "Linear", true, delay, 1, false);
+        delay += 100;
+        column.tween.repeat(5);
+        column.tween.onComplete.add(function() {
+          column.tween.stop();
+        }, this);
+      });
+      isAnimationRunning = true;
+    }
+  }
 
 }
 
