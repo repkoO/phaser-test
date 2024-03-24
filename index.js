@@ -22,14 +22,17 @@ function create() {
   for (let i = 0; i < 5; i++) {
     columns[i] = game.add.group();
     for (let j = 0; j < 40; j++) {
-      const image = columns[i][j] = columns[i].create(i * 110, 200 + j * -100, 'strawberry'); // ??? разобраться с кодом
+      const image = columns[i][j] = columns[i].create(0, 240 + j * -100, 'strawberry'); // ??? разобраться с кодом
+      image.anchor.set(0.5, 0.5)
       image.scale.set(0.15);
-      image.anchor.set(-0.26, -0.2)
+      // columns[i].align(1, 40, 100, 100)
       }
       const mask = game.add.graphics(0, 0);
       mask.beginFill(0xffffff);
-      mask.drawRect((i * 110) + 25, 15, 115, 300);
-      columns[i].mask = mask;
+      mask.drawRect((i * 115), 20, 115, 280);
+      // columns[i].mask = mask;
+      group.add(columns[i]);
+      group.align(5, 40, 120, 110);
     }
 
 // Создаем кнопку
