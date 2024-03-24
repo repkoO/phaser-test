@@ -9,11 +9,13 @@ function preload() {
 let columns = [];
 let button;
 let group;
-let gameCanvas
+let gameCanvas;
 
 function create() {
 
-  gameCanvas = game.canvas
+  gameCanvas = game.canvas;
+
+  console.log(gameCanvas);
   this.stage.backgroundColor = '#0072bc';
 
   group = game.add.group()
@@ -50,8 +52,13 @@ function create() {
         isAnimationRunning = false;
       }, 2000);
     } else {
+        button.events.onInputOver.add(function() { //листенер состояния кнопки для стиля
+          gameCanvas.style.cursor = 'pointer';
+      }, this);
+      button.events.onInputOut.add(function() { //листенер состояния кнопки для стиля
+          gameCanvas.style.cursor = 'default';
+      }, this);
       button.inputEnabled = false; // отключение курсора
-      gameCanvas.style.cursor = 'default'
       let delay = 0;
       columns.forEach((column) => {
         column.tween = this.add.tween(column).to({ y: 1000 }, 750, "Linear", true, delay, 1, false);
@@ -69,7 +76,6 @@ function create() {
       }, 2000)
     }
   }
-
 }
 
 function update() {
