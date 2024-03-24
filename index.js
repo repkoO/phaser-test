@@ -15,7 +15,6 @@ function create() {
 
   gameCanvas = game.canvas;
 
-  console.log(gameCanvas);
   this.stage.backgroundColor = '#0072bc';
 
   group = game.add.group()
@@ -23,10 +22,9 @@ function create() {
   for (let i = 0; i < 5; i++) {
     columns[i] = game.add.group();
     for (let j = 0; j < 40; j++) {
-      const image = columns[i][j] = group.create(i * 110, 200 + j * -100, 'strawberry');
+      const image = columns[i][j] = columns[i].create(i * 110, 200 + j * -100, 'strawberry'); // ??? разобраться с кодом
       image.scale.set(0.15);
       image.anchor.set(-0.3, -0.2)
-      columns[i].add(image);
       }
       const mask = game.add.graphics(0, 0);
       mask.beginFill(0xffffff);
