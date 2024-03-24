@@ -40,7 +40,7 @@ function create() {
   let isAnimationRunning = false;
 
   function spinSlot() {
-    if (isAnimationRunning) {
+    if (isAnimationRunning) { // остановка через 2 секунды после нажатия
       setTimeout(() => {
         columns.forEach((column) => {
             column.tween.stop();
@@ -48,16 +48,23 @@ function create() {
         isAnimationRunning = false;
       }, 2000);
     } else {
+      button.inputEnabled = false; // отключение курсора
+      button.setCursor('default') // стиль курсора по дефолту
       let delay = 0;
       columns.forEach((column) => {
         column.tween = this.add.tween(column).to({ y: 1000 }, 750, "Linear", true, delay, 1, false);
         delay += 100;
-        column.tween.repeat(5);
+        column.tween.repeat(30);
         column.tween.onComplete.add(function() {
           column.tween.stop();
         }, this);
       });
       isAnimationRunning = true;
+
+      setTimeout(() => {
+        button.inputEnabled = true; // включение курсора через 2 секунды после запуска анимации
+        button.setCursor('pointer')
+      }, 2000)
     }
   }
 
