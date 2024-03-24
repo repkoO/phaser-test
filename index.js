@@ -24,11 +24,11 @@ function create() {
     for (let j = 0; j < 40; j++) {
       const image = columns[i][j] = columns[i].create(i * 110, 200 + j * -100, 'strawberry'); // ??? разобраться с кодом
       image.scale.set(0.15);
-      image.anchor.set(-0.3, -0.2)
+      image.anchor.set(-0.26, -0.2)
       }
       const mask = game.add.graphics(0, 0);
       mask.beginFill(0xffffff);
-      mask.drawRect(i * 115, 15, 110, 300);
+      mask.drawRect((i * 110) + 25, 15, 115, 300);
       columns[i].mask = mask;
     }
 
