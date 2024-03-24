@@ -9,9 +9,11 @@ function preload() {
 let columns = [];
 let button;
 let group;
+let gameCanvas
 
 function create() {
 
+  gameCanvas = game.canvas
   this.stage.backgroundColor = '#0072bc';
 
   group = game.add.group()
@@ -49,7 +51,7 @@ function create() {
       }, 2000);
     } else {
       button.inputEnabled = false; // отключение курсора
-      button.setCursor('default') // стиль курсора по дефолту
+      gameCanvas.style.cursor = 'default'
       let delay = 0;
       columns.forEach((column) => {
         column.tween = this.add.tween(column).to({ y: 1000 }, 750, "Linear", true, delay, 1, false);
@@ -63,7 +65,7 @@ function create() {
 
       setTimeout(() => {
         button.inputEnabled = true; // включение курсора через 2 секунды после запуска анимации
-        button.setCursor('pointer')
+        gameCanvas.style.cursor = 'pointer'
       }, 2000)
     }
   }
