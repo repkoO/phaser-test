@@ -2,7 +2,14 @@ const game = new Phaser.Game(600, 400, Phaser.AUTO, '', { preload: preload, crea
 
 function preload() {
 
+  this.load.image('apple', './assets/apple.jpg');
+  this.load.image('card', './assets/card.jpg');
+  this.load.image('casino', './assets/casino.jpg');
+  this.load.image('cherry', './assets/cherry.png');
+  this.load.image('slot', './assets/slot.png');
   this.load.image('strawberry', './assets/strawberry.jpg');
+  this.load.image('watermelon', './assets/watermelon.png');
+
   this.load.image('button', './assets/button.png')
 }
 
@@ -11,7 +18,10 @@ let button;
 let group;
 let gameCanvas;
 
+const imageKeys = ['apple', 'card', 'casino', 'cherry', 'slot', 'strawberry', 'watermelon'];
+
 function create() {
+
 
   gameCanvas = game.canvas;
 
@@ -22,7 +32,8 @@ function create() {
   for (let i = 0; i < 5; i++) {
     columns[i] = game.add.group();
     for (let j = 0; j < 40; j++) {
-      const image = columns[i][j] = columns[i].create(0, 240 + j * -100, 'strawberry'); // ??? разобраться с кодом
+      const randomKey = imageKeys[Math.floor(Math.random() * imageKeys.length)];
+      const image = columns[i][j] = columns[i].create(0, 240 + j * -100, randomKey); // ??? разобраться с кодом
       image.anchor.set(0.5, 0.5)
       image.scale.set(0.15);
       // columns[i].align(1, 40, 100, 100)
@@ -30,9 +41,9 @@ function create() {
       const mask = game.add.graphics(0, 0);
       mask.beginFill(0xffffff);
       mask.drawRect((i * 115), 20, 115, 280);
-      // columns[i].mask = mask;
+      columns[i].mask = mask;
       group.add(columns[i]);
-      group.align(5, 40, 120, 110);
+      group.align(5, 40, 120, 0);
     }
 
 // Создаем кнопку
